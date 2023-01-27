@@ -32,21 +32,16 @@ int GetNumber(string message)
 // Получить массив строк с консоли
 string[] GetBaseArray(int lengthArray)
 {
-    //объявление переменных
     string[] baseArray = new string[lengthArray];
-    string result = String.Empty;
+    string newString = String.Empty;
 
-    // ввод строк с клавиатуры
     Console.WriteLine("Введите строки массива, после каждой <Enter>");
 
     for (int count = 0; count < lengthArray; count++)
     {
-        result = Console.ReadLine();
-        baseArray[count] = result;
-        if (result == null)
-        {
-            break;
-        }
+        newString = Console.ReadLine();
+        if(newString != null)
+        baseArray[count] = newString;
     }
 
     return baseArray;
@@ -61,6 +56,37 @@ void PrintArray(string[] array)
     }
 }
 
+// создать новый массив
+string[] GetNewArray(string[] array)
+{
+    int dimension = 0;
+    int index = 0;
+
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            dimension++;
+        }
+    }
+
+    string[] newArray = new string[dimension];
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            newArray[index] = array[i];
+            index++;
+        }
+    }
+
+    return newArray;
+}
+
 int dimension = GetNumber("Введите количество строк, которое хотите ввести");
+Console.WriteLine();
 string[] baseArray = GetBaseArray(dimension);
 PrintArray(baseArray);
+Console.WriteLine();
+string[] newArray = GetNewArray(baseArray);
+PrintArray(newArray);
